@@ -32,3 +32,11 @@ period_t sleepTime = SLEEP_LONGEST;       //period_t is an enum type defined in 
   RFM69 radio;
 #endif
 
+void Blink(byte PIN, byte DELAY_MS)
+{
+  pinMode(PIN, OUTPUT);
+  digitalWrite(PIN,HIGH);
+  delay(DELAY_MS/2);
+  digitalWrite(PIN,LOW);
+  delay(DELAY_MS/2);  
+}
