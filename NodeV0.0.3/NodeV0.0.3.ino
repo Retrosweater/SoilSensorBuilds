@@ -21,7 +21,7 @@ char buffer[50]; //Buffer for storing local strings
 
 void setup() {
   Wire.begin();
-  Serial.begin(115200); //115200 BAUD can change this to SERIAL_BAUD if I want all in config.h
+  Serial.begin(SERIAL_BAUD);
   Serial.flush(); //Unsure if needed, but fuck it
   Serial.println("\n"); //Buffer line to keep random initial serial monitor char's away
   
@@ -31,7 +31,7 @@ void setup() {
   radio.encrypt("Dreamplace2.0!!!"); //PASSWORD
 
   //Info print
-  sprintf(buffer, "Soil Node 1 transmitting at: %d Mhz...", FREQUENCY==RF69_433MHZ ? 433 : FREQUENCY==RF69_868MHZ ? 868 : 915);
+  sprintf(buffer, "Soil Node %d on Network %d transmitting at %d Mhz...", NODEID, NETWORKID, FREQUENCY==RF69_433MHZ ? 433 : FREQUENCY==RF69_868MHZ ? 868 : 915);
   Serial.println(buffer); //Print stored buffer
   sensor.begin(); // reset sensor
   delay(1000); // give some time to boot up
@@ -42,14 +42,21 @@ void setup() {
   Serial.println(sensor.getAddress(),HEX);
   Serial.print("Sensor Firmware version: ");
   Serial.println(sensor.getVersion(),HEX);
+    if (flash.initialize())
+  {
+    DEBUGln("SPI Flash Init OK!");
+  }
+  else
+  {
+    DEBUGln("SPI FlashMEM not found (is chip onboard?)");
+  }
   Serial.println();
-
   radio.sendWithRetry(GATEWAYID, "START", 6); // Test packet
   Blink(LED, 100);Blink(LED, 100);Blink(LED, 100); //BLINK
   
 }
 
-byte sendLoops = 5; //Sleep timer
+byte sendLoops = 8; //Sleep timer
 double M,T,L; //Storing vars
 byte sendLen;
 
@@ -60,14 +67,17 @@ void loop() {
   {
     sendLoops = SEND_LOOPS - 1;
     while (sensor.isBusy()) delay(50);
+      sensor.getCapacitance();
       M = sensor.getCapacitance();
       Serial.print("Soil Moisture Capacitance: ");
       Serial.println(M); //read capacitance register
       delay(50);
+      sensor.getTemperature();
       T = (((sensor.getTemperature()/(float)10)*1.8) + 32);
       Serial.print("Temperature: ");
       Serial.println(T); //temperature register
       delay(50); 
+      sensor.getLight(true);
       L = sensor.getLight(true);
       Serial.print("Light: ");
       Serial.println(L); //request light measurement, wait and read light register
