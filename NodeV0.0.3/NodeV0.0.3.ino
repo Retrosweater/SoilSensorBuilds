@@ -28,7 +28,7 @@ void setup() {
   //Initialize radio and Automatic Transmission Control
   radio.initialize(FREQUENCY,NODEID,NETWORKID);
   radio.enableAutoPower(ATC_RSSI); //Transmission control to save power
-  radio.encrypt("Dreamplace2.0!!!"); //PASSWORD
+  radio.encrypt("Password!!"); //PASSWORD
 
   //Info print
   sprintf(buffer, "Soil Node %d on Network %d transmitting at %d Mhz...", NODEID, NETWORKID, FREQUENCY==RF69_433MHZ ? 433 : FREQUENCY==RF69_868MHZ ? 868 : 915);
