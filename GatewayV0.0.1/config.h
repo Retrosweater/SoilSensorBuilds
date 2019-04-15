@@ -8,7 +8,7 @@
 #define NODEID          1 //the ID of this node
 #define NETWORKID     100 //the network ID of all nodes this node listens/talks to
 #define FREQUENCY     RF69_433MHZ //Match this with the version of your Moteino! (others: RF69_433MHZ, RF69_868MHZ)
-#define ENCRYPTKEY    "Dreamplace2.0!!!" //identical 16 characters/bytes on all nodes, not more not less!
+#define ENCRYPTKEY    "Password!!" //identical 16 characters/bytes on all nodes, not more not less!
 //#define IS_RFM69HW_HCW  //uncomment only for RFM69HW/HCW! Leave out if you have RFM69W/CW!
 #define ACK_TIME       30  // # of ms to wait for an ack packet
 //*****************************************************************************************************************************
