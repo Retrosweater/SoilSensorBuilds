@@ -24,7 +24,7 @@ void setup() {
 #ifdef IS_RFM69HW_HCW
   radio.setHighPower(); //must include this only for RFM69HW/HCW!
 #endif
-  radio.encrypt("Dreamplace2.0!!!");
+  radio.encrypt("Password!!");
   
 #ifdef ENABLE_ATC
   radio.enableAutoPower(ATC_RSSI);
