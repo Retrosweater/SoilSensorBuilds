@@ -9,7 +9,7 @@
 #define NETWORKID     100                 //the same on all nodes that talk to each other (range up to 255)
 #define GATEWAYID     1
 #define FREQUENCY   RF69_433MHZ
-#define ENCRYPTKEY    "Dreamplace2.0!!!" //exactly the same 16 characters/bytes on all nodes!
+#define ENCRYPTKEY    "Password!!" //exactly the same 16 characters/bytes on all nodes!
 //#define IS_RFM69HW                     //uncomment only for RFM69HW! Leave out if you have RFM69W!
 #define ENABLE_ATC                        //comment out this line to disable AUTO TRANSMISSION CONTROL
 #define ATC_RSSI -75
